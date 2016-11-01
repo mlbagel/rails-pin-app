@@ -7,20 +7,22 @@ class BoardsController < ApplicationController
   # GET /boards
   # GET /boards.json
   def index
+
     @boards = current_user.pinnable_boards
   end
 
   # GET /boards/1
   # GET /boards/1.json
   def show
-    @board = current_user.boards.find(params[:id])
+  @board = Board.find(params[:id])
+    #@board = current_user.boards.find(params[:id])
     @pins = @board.pins
   end
 
   # GET /boards/new
   def new
-    #@board = Board.new
-    @board = current_user.boards.new
+    @board = Board.new
+    #@board = current_user.boards.new
   end
 
 
@@ -31,6 +33,8 @@ class BoardsController < ApplicationController
 
     respond_to do |format|
       if @board.save
+        board= Board.find(params[:board][:board_pinner][:board_id])
+        @board.board_pinners.create(user: current_user, board: board)
         format.html { redirect_to @board, notice: 'Board was successfully created.' }
         format.json { render :show, status: :created, location: @board }
       else
@@ -43,7 +47,6 @@ class BoardsController < ApplicationController
 
     # GET /boards/1/edit
     def edit
-
       @board = Board.find(params[:id])
       @followers = current_user.user_followers
       #@followers = current_user.board_pinners
