@@ -1,6 +1,6 @@
 
-  <hr/>
   <h1>
+    <%= @board.inspect %>
     <% if !@board.nil? %>
   <%= "#{@board.board.name}" %>
   <% end %>
@@ -11,6 +11,15 @@
     <span style="font-variant: small-caps"><%= "#{@pin.title}" %></span>
   </h1>
 </div>
+<p>
+  <%= @pin.inspect %>
+<hr>
+<%= @user.inspect %>
+<hr>
+<%= @pin.pinnings.inspect %>
+<hr>
+<%= @user.boards.inspect %>
+<hr>
 
 <div class="show-pin">
   <% if @pin %>
@@ -27,16 +36,24 @@
     <%= link_to "#{@pin.url}", "#{@pin.url}",html_options={target: "_blank"} %>
   </p>
   </div>
-  <div class="repin">
-  <%= render partial: "shared/repin_form" , locals: {pin: @pin} %>
-  </div>
   <div>
   <p>
-  <%= "This pin has been pinned by..." %>
-  <br>
+    <%= @pin.inspect %>
+  <hr>
+  <%= @user.inspect %>
+  <hr>
+  <%= @pin.pinnings.inspect %>
+  <hr>
+  <%= @user.boards.inspect %>
+  <hr>
 
+
+</div>
+  <div class="repin"><%= "This pin has been pinned by..." %>
+  <br>
   <%  @users.each  do |user| %>
   <%= "#{user.first_name} #{user.last_name} /" %>
   <% end %>
   </p>
-</div>
+  <%= render partial: "shared/repin_form" , locals: {pin: @pin} %>
+  </div>

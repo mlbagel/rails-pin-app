@@ -10,6 +10,14 @@
 <% end %>
 
 <div class="form-group">
+  <%= @pin.inspect %>
+  <hr>
+  <%= @pin.pinnings.inspect %>
+  <hr>
+  <%= @user.boards.inspect %>
+  <hr>
+  <%= params.inspect %>
+  <hr>
   <%= form_for(@pin, multipart: true, :html => {:class => 'col-xlg-8 form-horizontal'}) do |f| %>
   <%= f.hidden_field :user_id, value: current_user.id %>
 

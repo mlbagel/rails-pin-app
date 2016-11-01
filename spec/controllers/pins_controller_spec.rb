@@ -4,8 +4,9 @@ RSpec.describe PinsController do
 
   before(:each) do
     @user = FactoryGirl.create(:user_with_boards)
-    @board = @user.boards.first
+
     login(@user)
+      @board = @user.boards.first
 
     @pin = FactoryGirl.create(:pin)
   end
@@ -150,8 +151,9 @@ end
       #with valid parameters
       before(:each) do
         @user = FactoryGirl.create(:user_with_boards)
-        @board = @user.boards.first
-        login(@user)
+          login(@user)
+          @board = @user.boards.first
+          @pin = @board.pins.first
 
         @pin_hash = {
           title: "Ruby Quiz",
@@ -161,11 +163,12 @@ end
           category_id: "1",
            pinning: { board_id: @board.id, user_id: @user.id }
          }
+
       end
 
       it 'responds with success' do
         put :update, id: @pin.id, pin: @pin_hash
-        expect(response).to redirect_to("/pins/#{@pin.id}")
+        expect(response.redirect?).to be(true)
       end
       it 'upates a pin' do
         put :update, id: @pin.id, pin: @pin_hash
