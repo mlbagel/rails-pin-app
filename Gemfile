@@ -35,7 +35,7 @@ end
 # gem 'capistrano-rails', group: :development
 
 #add paperclip file for images
-gem 'paperclip', '~> 4.3.6'
+gem 'paperclip', '~> 5.2.0'
 gem 'aws-sdk', '~> 1.6'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
